@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "busca_profundidade.h"
 
-
+//testa aq
 Pilha *pilha_criar(int capacidade) {
     Pilha *p = malloc(sizeof(Pilha));
     if (p == NULL) {
