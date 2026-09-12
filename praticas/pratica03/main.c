@@ -19,13 +19,7 @@ static void imprimir_ordem(const char *rotulo, int *ordem, int tamanho) {
 }
 
 int main(void) {
-    /* ---------------------------------------------------------
-     * Exemplo 1: DAG classico (ex.: dependencias de disciplinas)
-     *   0 -> 1, 0 -> 2
-     *   1 -> 3
-     *   2 -> 3
-     *   3 -> 4
-     * --------------------------------------------------------- */
+
     GrafoLista dag;
     grafolista_inicializar(&dag, 5);
     grafolista_inserir_arco(&dag, 0, 1);
@@ -52,9 +46,6 @@ int main(void) {
 
     grafolista_liberar(&dag);
 
-    /* ---------------------------------------------------------
-     * Exemplo 2: digrafo com ciclo (0 -> 1 -> 2 -> 0)
-     * --------------------------------------------------------- */
     GrafoLista com_ciclo;
     grafolista_inicializar(&com_ciclo, 3);
     grafolista_inserir_arco(&com_ciclo, 0, 1);
