@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "busca_largura.h"
 
-/* ===========================================================
- *                 GRAFO EM LISTA DE ADJACENCIA
- * =========================================================== */
 
 void grafolista_inicializar(GrafoLista *g, int num_vertices) {
     g->num_vertices = num_vertices;
@@ -50,10 +47,6 @@ void grafolista_liberar(GrafoLista *g) {
         g->adjacencia[i] = NULL;
     }
 }
-
-/* ===========================================================
- *                     FILA (FIFO) PARA BFS
- * =========================================================== */
 
 Fila *fila_criar(int capacidade) {
     Fila *f = malloc(sizeof(Fila));
@@ -109,10 +102,6 @@ int fila_remover(Fila *f) {
     f->tamanho--;
     return valor;
 }
-
-/* ===========================================================
- *                     BUSCA EM LARGURA (BFS)
- * =========================================================== */
 
 void bfs(GrafoLista *g, int origem, int *dist, int *pred) {
     for (int i = 0; i < g->num_vertices; i++) {
