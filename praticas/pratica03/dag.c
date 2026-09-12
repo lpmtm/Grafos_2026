@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include "dag.h"
 
-/* ===========================================================
- *            GRAFO DIRIGIDO EM LISTA DE ADJACENCIA
- * =========================================================== */
+//GRAFO DIRIGIDO EM LISTA DE ADJACENCIA
+
 
 void grafolista_inicializar(GrafoLista *g, int num_vertices) {
     g->num_vertices = num_vertices;
@@ -46,9 +45,7 @@ void grafolista_liberar(GrafoLista *g) {
     }
 }
 
-/* ===========================================================
- *                             FILA
- * =========================================================== */
+// fila
 
 Fila *fila_criar(int capacidade) {
     Fila *f = malloc(sizeof(Fila));
@@ -105,9 +102,7 @@ int fila_remover(Fila *f) {
     return valor;
 }
 
-/* ===========================================================
- *                            PILHA
- * =========================================================== */
+//Pilha
 
 Pilha *pilha_criar(int capacidade) {
     Pilha *p = malloc(sizeof(Pilha));
@@ -160,15 +155,11 @@ int pilha_pop(Pilha *p) {
     return valor;
 }
 
-/* ===========================================================
- *            ALGORITMO DE KAHN (BFS + grau de entrada)
- * =========================================================== */
 
 int *ordenacao_topologica_kahn(GrafoLista *g, int *tamanho) {
     int n = g->num_vertices;
     int grau_entrada[MAX_VERTICES] = {0};
 
-    /* Calcula o grau de entrada de cada vertice */
     for (int u = 0; u < n; u++) {
         for (NoAdj *aux = g->adjacencia[u]; aux != NULL; aux = aux->prox) {
             grau_entrada[aux->vertice]++;
@@ -206,7 +197,6 @@ int *ordenacao_topologica_kahn(GrafoLista *g, int *tamanho) {
     fila_destruir(f);
 
     if (count != n) {
-        /* Nem todos os vertices foram processados: ha ciclo, nao e DAG */
         free(ordem);
         *tamanho = 0;
         return NULL;
@@ -216,15 +206,6 @@ int *ordenacao_topologica_kahn(GrafoLista *g, int *tamanho) {
     return ordem;
 }
 
-/* ===========================================================
- *         ORDENACAO TOPOLOGICA VIA DFS (empilha na saida)
- * =========================================================== */
-
-/* Cores usadas na DFS para deteccao de ciclo em digrafo:
- * 0 = branco (nao visitado)
- * 1 = cinza  (em processamento, na pilha de recursao)
- * 2 = preto  (processamento concluido)
- */
 static void dfs_topologica_aux(GrafoLista *g, int u, int *cor, Pilha *pilha, int *ciclo) {
     cor[u] = 1;
 
@@ -233,10 +214,8 @@ static void dfs_topologica_aux(GrafoLista *g, int u, int *cor, Pilha *pilha, int
         if (cor[v] == 0) {
             dfs_topologica_aux(g, v, cor, pilha, ciclo);
         } else if (cor[v] == 1) {
-            /* Aresta de retorno para um vertice em processamento: ha ciclo */
             *ciclo = 1;
         }
-        /* cor[v] == 2 (preto): vertice ja finalizado, nada a fazer */
     }
 
     if (!(*ciclo)) {
@@ -280,9 +259,6 @@ int *ordenacao_topologica_dfs(GrafoLista *g, int *tamanho) {
     return ordem;
 }
 
-/* ===========================================================
- *                       EH_DAG
- * =========================================================== */
 
 int eh_dag(GrafoLista *g) {
     int tamanho;
