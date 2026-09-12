@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "busca_profundidade.h"
 
-/* ===========================================================
- *                     PILHA (LIFO) PARA DFS
- * =========================================================== */
 
 Pilha *pilha_criar(int capacidade) {
     Pilha *p = malloc(sizeof(Pilha));
@@ -57,10 +54,6 @@ int pilha_pop(Pilha *p) {
     return valor;
 }
 
-/* ===========================================================
- *                 BUSCA EM PROFUNDIDADE (DFS)
- * =========================================================== */
-
 void dfs_recursiva(GrafoLista *g, int u, int *visitado, int *pred,
                     int *tempo_entrada, int *tempo_saida, int *tempo) {
     visitado[u] = 1;
@@ -103,9 +96,6 @@ void dfs_iterativa(GrafoLista *g, int origem, int *visitado, int *pred) {
     pilha_destruir(p);
 }
 
-/* ===========================================================
- *                    APLICACOES DAS BUSCAS
- * =========================================================== */
 
 int eh_bipartido(GrafoLista *g) {
     int cor[MAX_VERTICES];
@@ -171,8 +161,6 @@ static int tem_ciclo_aux(GrafoLista *g, int u, int *visitado, int pai) {
                 return 1;
             }
         } else if (v != pai) {
-            /* Aresta de retorno para um vertice ja visitado
-             * que nao e o pai direto: ha um ciclo. */
             return 1;
         }
     }
