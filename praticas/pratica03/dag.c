@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "dag.h"
 
-//GRAFO DIRIGIDO EM LISTA DE ADJACENCIA
-
 
 void grafolista_inicializar(GrafoLista *g, int num_vertices) {
     g->num_vertices = num_vertices;
