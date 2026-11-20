@@ -29,6 +29,9 @@ int fila_cheia(const Fila *f);
 void fila_inserir(Fila *f, int valor);
 int fila_remover(Fila *f);
 
+/*
+ * BFS a partir de origem: preenche dist (distancia em arestas, -1 se inalcancavel)
+ * e pred (predecessor na arvore de busca, -1 se nao houver).
  * O chamador deve alocar dist e pred com tamanho g->num_vertices.
  */
 void bfs(GrafoLista *g, int origem, int *dist, int *pred);
